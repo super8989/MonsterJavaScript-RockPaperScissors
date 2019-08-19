@@ -5,8 +5,8 @@
     </head>
 
     <body>
-        <div class="score"></div>
         <div class="message"></div>
+        <div class="score"></div>
         <button type="button">Rock</button>
         <button type="button">Paper</button>
         <button type="button">Scissors</button>
@@ -16,7 +16,64 @@
             const score = document.querySelector(".score");
             const buttons = document.querySelectorAll("button");
 
+            const choice = ['Rock', 'Paper', 'Scissors'];
+            let points = [0, 0];
+
             console.log(buttons);
+
+            for (let i=0; i<buttons.length; i++) {
+                buttons[i].addEventListener("click", playGame)
+            }
+
+            function playGame(e) {
+                const playerHand = e.target.innerText;
+                let computerSelection = Math.floor(Math.random()*3);
+                const computerHand = choice[computerSelection];
+                
+
+                console.log(playerHand);
+                console.log(computerHand);
+                
+                if (playerHand === 'Rock') {
+                    if (computerHand === 'Scissors') {
+                        result = 'Player Wins';
+                        points[0]++;
+                    } else if (computerHand === 'Paper') {
+                        result = 'Computer Wins';
+                        points[1]++;
+                    } else {
+                        result = 'Tie';
+                    }
+                } else if (playerHand === 'Paper') {
+                    if (computerHand === 'Rock') {
+                        result = 'Player Wins';
+                        points[0]++;
+                    } else if (computerHand === 'Scissors') {
+                        result = 'Computer Wins';
+                        points[1]++;
+                    } else {
+                        result = 'Tie';
+                    }
+                } else if (playerHand === 'Scissors') {
+                    if (computerHand === 'Rock') {
+                        result = 'Computer Wins';
+                        points[1]++;
+                    } else if (computerHand === 'Paper') {
+                        result = 'Player Wins';
+                        points[0]++;
+                    } else {
+                        result = 'Tie';
+                    }
+                }
+
+                console.log(result);
+                console.log(points);
+
+                message.innerHTML = `Player selected ${playerHand}<br>Computer selected ${computerHand}<br><br>${result}<br><br>`;
+
+                score.innerHTML = `Player: ${points[0]}<br>Computer: ${points[1]}`;
+                
+            }
 
         </script>
     </body>
